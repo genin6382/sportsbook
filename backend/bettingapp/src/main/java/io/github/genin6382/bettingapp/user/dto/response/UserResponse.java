@@ -2,6 +2,7 @@ package io.github.genin6382.bettingapp.user.dto.response;
 
 import java.util.UUID;
 import java.time.LocalDateTime;
+import java.math.BigDecimal;
 import io.github.genin6382.bettingapp.user.User;
 import lombok.Getter;
 
@@ -10,8 +11,8 @@ public class UserResponse {
     private UUID id;
     private String phoneNumber;
     private String email;
-    private Double balance;      
-    private Double wagered;    
+    private BigDecimal balance;      
+    private BigDecimal wagered;    
     private LocalDateTime createdAt;
     
 

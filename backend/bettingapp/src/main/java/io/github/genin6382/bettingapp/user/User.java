@@ -13,6 +13,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "users")
@@ -35,10 +36,10 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private Double balance = 0.0;
+    private BigDecimal balance = BigDecimal.ZERO;
 
     @Column(nullable = false)
-    private Double wagered = 0.0;
+    private BigDecimal wagered = BigDecimal.ZERO;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

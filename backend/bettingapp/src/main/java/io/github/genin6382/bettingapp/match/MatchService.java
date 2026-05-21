@@ -2,10 +2,14 @@ package io.github.genin6382.bettingapp.match;
 
 import io.github.genin6382.bettingapp.match.dto.request.MatchCreateDTO;
 import io.github.genin6382.bettingapp.match.dto.response.MatchResponseDTO;
+import io.github.genin6382.bettingapp.team.TeamRepository;
+import io.github.genin6382.bettingapp.team.Team;
 import io.github.genin6382.bettingapp.exception.ResourceNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+
 
 import java.util.UUID;
 
@@ -13,9 +17,11 @@ import java.util.UUID;
 public class MatchService {
 
     private final MatchRepository matchRepository;
+    private final TeamRepository teamRepository;
 
-    public MatchService(MatchRepository matchRepository) {
+    public MatchService(MatchRepository matchRepository, TeamRepository teamRepository) {
         this.matchRepository = matchRepository;
+        this.teamRepository = teamRepository;
     }
 
     private MatchResponseDTO mapToResponse(Match match) {
@@ -36,9 +42,19 @@ public class MatchService {
     }
 
     public MatchResponseDTO createMatch(MatchCreateDTO dto) {
+        Team team1 = teamRepository.findById(dto.getTeam1Id())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Team1 not found with id: " + dto.getTeam1Id()
+                ));
+
+        Team team2 = teamRepository.findById(dto.getTeam2Id())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Team2 not found with id: " + dto.getTeam2Id()
+                ));
+
         Match match = new Match();
-        match.setTeam1Id(dto.getTeam1Id());
-        match.setTeam2Id(dto.getTeam2Id());
+        match.setTeam1(team1);
+        match.setTeam2(team2);
         match.setLocation(dto.getLocation());
         match.setMatchDate(dto.getMatchDate());
 
@@ -52,8 +68,18 @@ public class MatchService {
                         "Match not found with id: " + id
                 ));
 
-        match.setTeam1Id(dto.getTeam1Id());
-        match.setTeam2Id(dto.getTeam2Id());
+        Team team1 = teamRepository.findById(dto.getTeam1Id())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Team1 not found with id: " + dto.getTeam1Id()
+                ));
+
+        Team team2 = teamRepository.findById(dto.getTeam2Id())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Team2 not found with id: " + dto.getTeam2Id()
+                ));
+
+        match.setTeam1(team1);
+        match.setTeam2(team2);
         match.setLocation(dto.getLocation());
         match.setMatchDate(dto.getMatchDate());
 

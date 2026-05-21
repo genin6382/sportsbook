@@ -7,9 +7,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import org.hibernate.annotations.CreationTimestamp;
+
+import io.github.genin6382.bettingapp.team.Team;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -25,11 +29,13 @@ public class Match {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "team1_id", nullable = false)
-    private UUID team1Id;
+    @ManyToOne
+    @JoinColumn(name = "team1_id", nullable = false)
+    private Team team1;
 
-    @Column(name = "team2_id", nullable = false)
-    private UUID team2Id;
+    @ManyToOne
+    @JoinColumn(name = "team2_id", nullable = false)
+    private Team team2;
 
     @Column(name = "result")
     private String result;

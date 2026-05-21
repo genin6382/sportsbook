@@ -11,8 +11,8 @@ import lombok.Getter;
 public class MatchResponseDTO {
 
     private UUID id;
-    private UUID team1_id;
-    private UUID team2_id;
+    private UUID team1Id;
+    private UUID team2Id;
     private String result;
     private String location;
     private LocalDateTime matchDate;
@@ -20,8 +20,8 @@ public class MatchResponseDTO {
 
     public MatchResponseDTO(Match match) {
         this.id = match.getId();
-        this.team1_id = match.getTeam1Id();
-        this.team2_id = match.getTeam2Id();
+        this.team1Id = match.getTeam1().getId();
+        this.team2Id = match.getTeam2().getId();
         this.result = match.getResult();
         this.location = match.getLocation();
         this.matchDate = match.getMatchDate();
