@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Index;
 import org.hibernate.annotations.CreationTimestamp;
 
 import io.github.genin6382.bettingapp.team.Team;
@@ -19,7 +20,12 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "matches")
+@Table(
+    name = "matches",
+    indexes = {
+        @Index(name = "idx_match_date", columnList = "match_date")
+    } //Index on match_date for faster queries based on date
+)
 @Getter
 @Setter
 @NoArgsConstructor

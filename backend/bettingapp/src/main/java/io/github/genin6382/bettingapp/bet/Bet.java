@@ -10,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +25,13 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "bets")
+@Table(
+    name = "bets",
+    indexes ={
+        @Index(name = "idx_bet_user_id", columnList = "user_id"), //All bets by a user
+        @Index(name = "idx_bet_match_id", columnList = "match_id") // All bets on a match for quick retrieval of betting activity on a match
+    }
+)
 @Getter
 @Setter
 @NoArgsConstructor
