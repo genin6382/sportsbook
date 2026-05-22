@@ -1,0 +1,29 @@
+@if (userProfile()) {
+  <h1>Welcome {{ userProfile()!.id }}</h1>
+
+  <section>
+    <h2>User Details</h2>
+    <p><strong>ID:</strong> {{ userProfile()!.id }}</p>
+    <p><strong>Phone Number:</strong> {{ userProfile()!.phoneNumber }}</p>
+    <p><strong>Email:</strong> {{ userProfile()!.email }}</p>
+    <p><strong>Balance:</strong> {{ userProfile()!.balance }}</p>
+    <p><strong>Amount Wagered:</strong> {{ userProfile()!.wagered }}</p>
+    <p><strong>Join Date:</strong> {{ userProfile()!.createdAt }}</p>
+  </section>
+
+  <form [formGroup]="userForm" (ngSubmit)="updateProfile()">
+    <label for="phoneNumber">Phone Number:</label>
+    <input id="phoneNumber" formControlName="phoneNumber" />
+
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email" />
+
+    <button type="submit" [disabled]="userForm.invalid">Update Profile</button>
+  </form>
+
+  <button (click)="logout()">Logout</button>
+  <button (click)="deleteProfile()">Delete Profile</button>
+
+} @else {
+  <p>Loading your profile details...</p>
+}
