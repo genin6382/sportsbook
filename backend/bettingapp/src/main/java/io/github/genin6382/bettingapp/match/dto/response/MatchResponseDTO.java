@@ -12,7 +12,9 @@ public class MatchResponseDTO {
 
     private UUID id;
     private UUID team1Id;
+    private String team1Name;
     private UUID team2Id;
+    private String team2Name;
     private String result;
     private String location;
     private LocalDateTime matchDate;
@@ -21,7 +23,9 @@ public class MatchResponseDTO {
     public MatchResponseDTO(Match match) {
         this.id = match.getId();
         this.team1Id = match.getTeam1().getId();
+        this.team1Name = match.getTeam1().getName();
         this.team2Id = match.getTeam2().getId();
+        this.team2Name = match.getTeam2().getName();
         this.result = match.getResult();
         this.location = match.getLocation();
         this.matchDate = match.getMatchDate();
