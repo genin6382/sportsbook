@@ -1,1 +1,26 @@
-<p>my-bets works!</p>
+<h1>My Bets</h1>
+
+@if (error()) { <p>{{ error() }}</p> }
+
+@if (loading()) {
+  <p>Loading bets...</p>
+} @else {
+  @for (bet of bets(); track bet.id) {
+    <div>
+      <p><strong>Match ID:</strong> {{ bet.matchId }}</p>
+      <p><strong>Wager:</strong> {{ bet.wager }}</p>
+      <p><strong>Odds:</strong> {{ bet.odds }}</p>
+      <p><strong>Potential Payout:</strong> {{ bet.potentialPayout }}</p>
+      <p><strong>Result:</strong> {{ bet.result ?? 'Pending' }}</p>
+      <p><strong>Placed on:</strong> {{ bet.createdAt }}</p>
+    </div>
+  } @empty {
+    <p>You haven't placed any bets yet.</p>
+  }
+
+  <div>
+    <button (click)="prevPage()" [disabled]="currentPage() === 0">Previous</button>
+    <span>Page {{ currentPage() + 1 }} of {{ totalPages() }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage() === totalPages() - 1">Next</button>
+  </div>
+}

@@ -1,1 +1,40 @@
-<p>match-detail works!</p>
+<button (click)="goBack()">← Back to Matches</button>
+
+@if (loading()) {
+  <p>Loading match...</p>
+} @else if (match()) {
+  <h1>{{ match()!.team1Name }} vs {{ match()!.team2Name }}</h1>
+  <p>📍 Location: {{ match()!.location }}</p>
+  <p>📅 Date: {{ match()!.matchDate }}</p>
+  <p>Result: {{ match()!.result ?? 'Upcoming' }}</p>
+
+  @if (match()!.result === null) {
+    <h2>Place a Bet</h2>
+
+    @if (betSuccess()) {
+      <p>✅ Bet placed! Potential payout: {{ placedBet()!.potentialPayout }}</p>
+    }
+
+    @if (error()) {
+      <p>{{ error() }}</p>
+    }
+
+    <form [formGroup]="betForm" (ngSubmit)="placeBet()">
+      <label>Wager Amount</label>
+      <input type="number" formControlName="wager" placeholder="Enter amount" />
+      @if (betForm.get('wager')?.invalid && betForm.get('wager')?.touched) {
+        <span>Wager must be at least 1</span>
+      }
+
+      <label>Odds</label>
+      <input type="number" formControlName="odds" placeholder="Enter odds" />
+      @if (betForm.get('odds')?.invalid && betForm.get('odds')?.touched) {
+        <span>Odds must be at least 1</span>
+      }
+
+      <button type="submit" [disabled]="betForm.invalid">Place Bet</button>
+    </form>
+  } @else {
+    <p>This match has ended. Betting is closed.</p>
+  }
+}

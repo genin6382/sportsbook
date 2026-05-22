@@ -27,7 +27,7 @@ export class Login {
       const user: UserLoginRequest = this.loginForm.value as UserLoginRequest;
       this.UserService.login(user).subscribe({
         next: (response) => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/matches']);
           this.loginForm.reset();
         },
         error: (error) => {

@@ -33,7 +33,7 @@ export class Register {
 
     this.userService.register(formValue).subscribe({
       next: (response) => {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/matches']);
         this.registerForm.reset(); 
       },
       error: (error) => {

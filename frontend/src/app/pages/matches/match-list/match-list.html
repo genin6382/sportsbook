@@ -1,1 +1,26 @@
-<p>match-list works!</p>
+<h1>Matches</h1>
+
+@if (error()) {
+  <p>{{ error() }}</p>
+}
+
+@if (loading()) {
+  <p>Loading matches...</p>
+} @else {
+  @for (match of matches(); track match.id) {
+    <div (click)="goToMatch(match.id)">
+      <h3>{{ match.team1Name }} vs {{ match.team2Name }}</h3>
+      <p>📍 {{ match.location }}</p>
+      <p>📅 {{ match.matchDate }}</p>
+      <p>Result: {{ match.result ?? 'Upcoming' }}</p>
+    </div>
+  } @empty {
+    <p>No matches available.</p>
+  }
+
+  <div>
+    <button (click)="prevPage()" [disabled]="currentPage() === 0">Previous</button>
+    <span>Page {{ currentPage() + 1 }} of {{ totalPages() }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage() === totalPages() - 1">Next</button>
+  </div>
+}
