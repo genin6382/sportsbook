@@ -43,7 +43,7 @@ class UserController {
     public UserResponse getUserByID(@PathVariable UUID id){
         return userService.getUserByID(id);
     }
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<UserResponse> createUser(@RequestBody @Valid UserRegistrationDTO request){
         UserResponse userResponse = userService.createUser(request);
         return ResponseEntity.ok(userResponse);
