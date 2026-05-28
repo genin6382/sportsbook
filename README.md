@@ -64,14 +64,12 @@ sportsbook/
         ├── core/
         │   ├── models/              # TypeScript interfaces (User, Match, Bet, Team)
         │   ├── services/            # Angular services (user, match, bet, team)
-        │   ├── guards/              # Route auth guards
-        │   └── interceptors/        # HTTP interceptors
         ├── pages/
         │   ├── auth/                # Login & Register pages
         │   ├── matches/             # Match list & detail pages
         │   ├── bets/                # My bets page
         │   └── profile/             # User profile page
-        └── shared/                  # Shared components (navbar etc.)
+        └── environments/            # dev/prod env settings
 ```
 
 ---
